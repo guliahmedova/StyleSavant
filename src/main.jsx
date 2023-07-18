@@ -8,12 +8,18 @@ import { store } from './app/store';
 import { RouterProvider, Route, createRoutesFromElements, createBrowserRouter } from 'react-router-dom';
 import PostList from './components/PostList';
 import { fetchUsers } from './features/users/usersSlice';
+import AddPostForm from './components/AddPostForm';
+import SinglePostPage from './components/SinglePostPage';
 
 store.dispatch(fetchUsers());
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Layout />}>
     <Route index element={<PostList />} />
+    <Route path='post'>
+      <Route index element={<AddPostForm />} />
+      <Route path=':postId' element={<SinglePostPage />} />
+    </Route>
   </Route>
 ));
 

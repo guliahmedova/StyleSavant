@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { selectAllPosts, getPostsError, getPostsStatus, fetchPosts } from "../features/posts/postsSlice";
-import AddPostForm from "./AddPostForm";
 import PostsExcerpt from "./PostsExcerpt";
 
 const PostList = () => {
@@ -29,7 +28,7 @@ const PostList = () => {
             </div>
     } else if (postStatus === 'succeeded') {
         const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date));
-        content = orderedPosts.map(post => <PostsExcerpt key={post.id} post={post} />);
+        content = orderedPosts.map((post, index) => <PostsExcerpt key={index} post={post} />);
     } else if (postStatus === 'failed') {
         content =
             <div className="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800" role="alert">
@@ -44,9 +43,7 @@ const PostList = () => {
     }
 
     return (
-        <div className="max-w-screen-xl mx-auto p-4">
-            <AddPostForm />
-            <h2 className="my-10 text-indigo-900 text-4xl">Posts</h2>
+        <div className="max-w-screen-xl mx-auto p-4 mt-20">
             <div className="grid xl:grid-cols-3 gap-4 md:grid-cols-2 md:gap-2 sm:grid-cols-1 sm:gap-1 sm:justify-items-center">
                 {content}
             </div>

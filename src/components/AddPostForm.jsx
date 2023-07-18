@@ -18,8 +18,6 @@ const AddPostForm = () => {
     const users = useSelector(selectAllUsers);
     const dispatch = useDispatch();
 
-    console.log('users: ', users);
-
     const onSavePostClicked = () => {
         if (canSave) {
             try {
